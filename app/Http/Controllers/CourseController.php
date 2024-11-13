@@ -49,9 +49,10 @@ class CourseController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'teacher_id' => 'nullable|exists:teachers,id',
         ]);
 
-        $course->update($request->only(['title', 'description']));
+        $course->update($request->only(['title', 'description', 'teacher_id']));
 
         return redirect()->route('courses.index')->with('success', 'Course updated successfully.');
     }
